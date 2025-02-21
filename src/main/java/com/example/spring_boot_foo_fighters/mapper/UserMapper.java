@@ -1,22 +1,25 @@
 package com.example.spring_boot_foo_fighters.mapper;
 
-import com.example.spring_boot_foo_fighters.dto.HumanDto;
 import com.example.spring_boot_foo_fighters.dto.UserDto;
-import com.example.spring_boot_foo_fighters.entity.HumanEntity;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
-@Component
-public class UserMapper {
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        unmappedSourcePolicy = ReportingPolicy.IGNORE)
+public interface UserMapper {
 
-    public UserEntity toUserEntity(UserDto userDto) {
-        UserEntity userEntity = new UserEntity();
+    @Mapping(target = "name", source = "firstName")
+    @Mapping(target = "phoneNumber", expression = "java(deletePlus(userDto))")
+    UserEntity toUserEntity(UserDto userDto);
 
-        userEntity.setAge(userDto.getAge());
-        userEntity.setName(userDto.getName());
-        userEntity.setIsVerified(userDto.getIsVerified());
+    default String deletePlus(UserDto userDto) {
+        if (userDto.getPhoneNumber().startsWith("+"))
+            return userDto.getPhoneNumber().substring(1);
 
-        return userEntity;
+        return userDto.getPhoneNumber();
     }
 
 }

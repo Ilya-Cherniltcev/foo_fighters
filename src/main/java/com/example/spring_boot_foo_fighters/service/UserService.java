@@ -14,8 +14,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public void save(UserDto userDto){
-        userRepository.save(userMapper.toUserEntity(userDto));
+    public UserEntity save(UserDto userDto) {
+        if (userDto.getAge() > 20) {
+            return userRepository.save(userMapper.toUserEntity(userDto));
+        }
+
+        throw new IllegalArgumentException("Age less than 20");
     }
 
 }

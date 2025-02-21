@@ -1,11 +1,11 @@
 databaseChangeLog:
   - changeSet:
-      id: addColumn
+      id: add-phone-number
       author: Gunay Hashimova
       changes:
         - addColumn:
             tableName: users
             columns:
               - column:
-                  name: is_verified
-                  type: varchar(10)
+                  name: phone_number
+                  type: varchar(100)
