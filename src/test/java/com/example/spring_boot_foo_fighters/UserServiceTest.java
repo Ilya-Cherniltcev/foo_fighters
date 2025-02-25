@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class UserServiceTest {
     private static UserDto userDto;
 
-    @Spy
+    @Mock
     private UserMapper userMapper;
 
     @Mock
@@ -41,7 +41,7 @@ public class UserServiceTest {
 
         UserEntity userEntity = new UserEntity();
 
-//        when(userMapper.toUserEntity(userDto)).thenReturn(userEntity);
+        when(userMapper.toUserEntity(userDto)).thenReturn(userEntity);
         when(userRepository.save(userEntity)).thenReturn(userEntity);
 
         UserEntity actual = userService.save(userDto);
