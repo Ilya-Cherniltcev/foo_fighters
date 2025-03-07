@@ -1,4 +1,9 @@
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
   application:
     name: ms-human
   datasource:
@@ -14,3 +19,6 @@ spring:
 
 server:
   port: 4444
+
+api:
+  url: http://localhost:9090
