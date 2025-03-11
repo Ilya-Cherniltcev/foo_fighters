@@ -10,13 +10,11 @@ import java.io.Serializable;
 @Data
 public class UserDto implements Serializable {
 
-    @NotBlank
+    @NotBlank(message = "First name can not be null !")
     private String firstName;
 
-    @NotNull
+    @NotNull(message = "Age can not be null !")
     private Integer age;
-
-    private Boolean isVerified;
 
     @NotBlank
     private String phoneNumber;
