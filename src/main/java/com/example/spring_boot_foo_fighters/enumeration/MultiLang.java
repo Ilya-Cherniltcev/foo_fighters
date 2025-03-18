@@ -10,7 +10,8 @@ import java.util.ResourceBundle;
 @Getter
 public enum MultiLang {
 
-    TEXT("wording.mail.text");
+    TEXT("wording.mail.text"),
+    TITLE("wording.mail.title");
 
     private final String message;
 

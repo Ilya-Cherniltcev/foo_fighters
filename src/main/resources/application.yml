@@ -22,3 +22,8 @@ server:
 
 api:
   url: http://localhost:9090
+
+openweathermap:
+  api:
+    key: f14c808d9ecff8342c55fd048e874f4c
+

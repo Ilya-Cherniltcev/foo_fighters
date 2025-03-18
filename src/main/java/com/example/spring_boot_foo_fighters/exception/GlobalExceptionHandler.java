@@ -22,16 +22,15 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NotValidAgeException.class)
-    public RestExceptionResponse handleServiceExceptions(NotValidAgeException ex,
+    @ExceptionHandler(ServiceException.class)
+    public RestExceptionResponse handleServiceExceptions(ServiceException ex,
                                                          HttpServletRequest request) {
-        log.error("Service error, status: message: {}", ex.getMessage());
+        log.error("Service error message: {}", ex.getMessage());
 
         return RestExceptionResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .path(request.getRequestURI())
-                .code("-1")
                 .message(ex.getMessage())
                 .build();
     }
@@ -46,7 +45,6 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .path(request.getRequestURI())
-                .code("-1")
                 .message(ex.getFieldError().getDefaultMessage())
                 .build();
     }
@@ -61,7 +59,6 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .path(request.getRequestURI())
-                .code("-1")
                 .message("Internal server error")
                 .build();
     }
