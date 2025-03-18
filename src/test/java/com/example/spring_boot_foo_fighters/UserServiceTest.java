@@ -2,6 +2,7 @@ package com.example.spring_boot_foo_fighters;
 
 import com.example.spring_boot_foo_fighters.dto.UserDto;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
+import com.example.spring_boot_foo_fighters.exception.NotValidAgeException;
 import com.example.spring_boot_foo_fighters.mapper.UserMapper;
 import com.example.spring_boot_foo_fighters.repository.UserRepository;
 import com.example.spring_boot_foo_fighters.service.UserService;
@@ -31,7 +32,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @BeforeEach
-    void init(){
+    void init() {
         userDto = new UserDto();
     }
 
@@ -50,10 +51,12 @@ public class UserServiceTest {
     }
 
     @Test
-    void save_IfAgeLessThan20_ThrowException() {
-        userDto.setAge(15);
+    void save_WithInvalidAge_ThrowException() {
+        userDto.setAge(5);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userService.save(userDto));
+        Exception ex = Assertions.assertThrows(NotValidAgeException.class, () -> userService.save(userDto));
+
+        Assertions.assertEquals(ex.getMessage(), "Your age less than 6...");
     }
 
 }
