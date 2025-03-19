@@ -1,10 +1,11 @@
 package com.example.spring_boot_foo_fighters.config;
 
 import com.example.spring_boot_foo_fighters.client.MailSenderClient;
+import com.example.spring_boot_foo_fighters.client.WeatherClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableFeignClients(clients = {MailSenderClient.class})
+@EnableFeignClients(clients = {MailSenderClient.class, WeatherClient.class})
 public class FeignClientConfiguration {
 }

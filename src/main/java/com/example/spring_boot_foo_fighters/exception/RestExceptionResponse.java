@@ -16,7 +16,6 @@ public class RestExceptionResponse {
     private final LocalDateTime timestamp;
     private final Integer status;
     private final String path;
-    private final String code;
     private final String message;
 
 }
